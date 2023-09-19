@@ -1,0 +1,77 @@
+config:
+  credentials:
+  - id: sqaaas_tmp_cred-gloppy-cardinal-bloodhound
+    password_var: GIT_PASSWORD
+    username_var: GIT_USER
+  project_repos:
+    git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine:
+      branch: master
+      credential_tmp: true
+      credentials_id: sqaaas_tmp_cred-gloppy-cardinal-bloodhound
+      repo: https://git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine.git
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-ivory-beaver.sh
+        container: qc.acc_scaly-tomato-hamster
+  QC.Doc:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.nerdy-red-frise.sh
+        container: qc.doc_bumpy-crimson-crocodile
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine git:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-firebrick-deer.sh
+        container: qc.doc_homely-silver-okapi
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.dorky-teal-cat.sh
+        container: qc.doc_scanty-goldenrod-jellyfish
+  QC.Lic:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-grey-lynx.sh
+        container: qc.lic_leaky-fuchsia-armadillo
+  QC.Met:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.lanky-thistle-starfish.sh
+        container: qc.met_tasty-magenta-cattle
+  QC.Sec:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.flimsy-vermilion-impala.sh
+        container: qc.sec_skimpy-peach-wolfhound
+  QC.Sty:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-emerald-llama.sh
+        container: qc.sty_chewy-sepia-cow
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-white-dodo.sh
+        container: qc.sty_pretty-celadon-lionfish
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.cloudy-goldenrod-bloodhound.sh
+        container: qc.sty_paltry-asparagus-chimpanzee
+  QC.Ver:
+    repos:
+      git.man.poznan.pl/stash/scm/eosc-rs/offline-ml-ai-engine get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.fuzzy-saffron-gar.sh
+        container: qc.ver_homely-cinnamon-lobster
+timeout: 5400
